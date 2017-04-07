@@ -23,8 +23,8 @@ DPlex is an inverted index word search application. It's an application that hel
 The application can be accessed on heroku via [https://dplex-staging.herokuapp.com](https://dplex-staging.herokuapp.com).
 It can also be used locally by following the steps below
 
-1.  Clone the repository `git clone https://github.com/andela-aonifade/invertedindex.git`
-2.  Move into the repository directory `cd invertedindex`
+1.  Clone the repository `git clone https://github.com/andela-aonifade/dplex.git`
+2.  Move into the repository directory `cd dplex`
 3.  Run `npm install` to install all the dependencies. The application is build on [Nodejs](nodejs.org) `npm install`
 
     ### Dependencies
