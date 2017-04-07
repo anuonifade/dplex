@@ -3,7 +3,8 @@
 [![Build Status](https://travis-ci.org/andela-aonifade/dplex.svg?branch=development)](https://travis-ci.org/andela-aonifade/dplex)
 
 # DPlex - Inverted Index
-Inverted Index is concept used to do a reverse search.
+DPlex is an inverted index word search application. It's an application that help you index books and search through indexed books. It is easy to use and free for anyone who cares to use it.
+**DPlex** allows users to rapidly index documents in a JSON format of the form below and search through all indexed document to view the words contained in each documents.
 
 ## Features of the application
 - Allow upload of json files of the format below
