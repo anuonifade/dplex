@@ -1,0 +1,14 @@
+css/
+samples/
+node_modules/
+images/
+spec/lib
+spec/support
+spec/*.html
+.codeclimate.yml
+.env
+.hound.yml
+*.html
+karma.conf.js
+Profile
+
