@@ -2,10 +2,15 @@
 const hasProperty = Object.prototype.hasOwnProperty;
 let instance = null;
 
+/**
+ * @class InvertedIndex class
+ * Contains methods for InvertedIndex
+*/
 class InvertedIndex {
   /**
-    * constructor method
-    *@
+    * constructor method ensures that there is only
+    * one instance of the class
+    * @return {object} - Instance of the class
   */
   constructor() {
     if (!instance) {
