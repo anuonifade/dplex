@@ -96,6 +96,10 @@ describe('InvertedIndex class', () => {
       expect(this.indexInstance.filesIndexed.books.index)
         .toEqual(expectedResult);
     });
+    it('should return false for incorrect document structure', () => {
+      const term = { t1: 'Welcome home', text: 'This is really home' };
+      expect(this.indexInstance.createIndex(term, 'term')).toBeFalsy();
+    });
   });
   describe('Search Index', () => {
     it('should search through single files that are indexed', () => {
@@ -109,6 +113,11 @@ describe('InvertedIndex class', () => {
         .toEqual(Object.keys(requiredOutput));
       expect(searchTerm[0].indexes).toEqual(requiredOutput);
     });
+    it('should return false for an empty String', () => {
+      const term = '';
+      expect(this.indexInstance.searchIndex(term, 'books'))
+      .toBeFalsy();
+    });
   });
 
   describe('Tokenize words', () => {
@@ -117,14 +126,6 @@ describe('InvertedIndex class', () => {
       const expectedTokens = ['alice', 'loves', 'her', 'imagination'];
       excerpt = this.indexInstance.tokenize(excerpt);
       expect(excerpt).toEqual(expectedTokens);
-    });
-  });
-
-  describe('Search index', () => {
-    it('should return false for an empty String', () => {
-      const term = '';
-      expect(this.indexInstance.searchIndex(term, 'books'))
-      .toBeFalsy();
     });
   });
 
@@ -166,9 +167,6 @@ describe('InvertedIndex class', () => {
       expect(this.indexInstance.getIndex(filename))
         .toEqual(expectedOutput);
     });
-  });
-
-  describe('Get index', () => {
     it('should return the appropriate output for the given filename', () => {
       const filename = '';
       this.indexInstance.createIndex(this.books, 'books');
@@ -182,12 +180,9 @@ describe('InvertedIndex class', () => {
       const term = { t1: 'Welcome home', text: 'This is really home' };
       expect(this.indexInstance.validateFile(term)).toBeFalsy();
     });
-  });
-
-  describe('Create Index Data', () => {
-    it('should return false for incorrect document structure', () => {
-      const term = { t1: 'Welcome home', text: 'This is really home' };
-      expect(this.indexInstance.createIndex(term, 'term')).toBeFalsy();
+    it('should return true for correct document structure', () => {
+      const term = { title: 'Welcome home', text: 'This is really home' };
+      expect(this.indexInstance.validateFile(term)).toBeTruthy();
     });
   });
 

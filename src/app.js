@@ -2,7 +2,7 @@
 dPlexApp.controller('dPlexController', ['$scope', 'toastr', ($scope, toastr) => {
   $scope.title = 'DPlex - Inverted Index for All';
   // Create an object of the class InvertedIndex
-  const invIndex = new InvertedIndex();
+  const invertedIndex = new InvertedIndex();
   $scope.uploadedFiles = {};
   $scope.allFlag = false;
   $scope.allFilesIndexed = {};
@@ -18,15 +18,15 @@ dPlexApp.controller('dPlexController', ['$scope', 'toastr', ($scope, toastr) => 
       return false;
     }
     // If index was created for that file
-    if (invIndex.createIndex($scope
+    if (invertedIndex.createIndex($scope
       .uploadedFiles[fileChoice].text, fileChoice)) {
       // Gets the indexed words
-      const indexes = invIndex.getIndex(fileChoice);
+      const indexes = invertedIndex.getIndex(fileChoice);
       $scope.indexDisplay = true;
       $scope.indexed = [
         {
           indexes,
-          documents: invIndex.getDocuments(fileChoice),
+          documents: invertedIndex.getDocuments(fileChoice),
           indexedFile: fileChoice
         }
       ];
@@ -42,30 +42,25 @@ dPlexApp.controller('dPlexController', ['$scope', 'toastr', ($scope, toastr) => 
     } else {
       // The file was not indexed because it is invalid;
       delete $scope.uploadedFiles[fileChoice];
-      toastr.error(invIndex.error.message);
+      toastr.error(invertedIndex.error.message);
     }
   };
 
   $scope.searchIndex = () => {
     const fileChoice = $scope.uploadToSearch;
     $scope.searchQuery = $scope.searchTerm;
-
     if (!$scope.uploadedFiles.hasOwnProperty(fileChoice) && fileChoice !== 'all') {
       toastr.warning('Select a file that has been indexed');
       return false;
     }
-
-    const result = invIndex.searchIndex($scope.searchQuery, fileChoice);
-
+    const result = invertedIndex.searchIndex($scope.searchQuery, fileChoice);
     if (!result) {
       toastr.error('Invalid search query');
       return false;
     }
-
     $scope.indexed = result;
     $scope.indexDisplay = false;
   };
-
   /**
    * readJson function is used to read the content of a file
    * @param {object} dom is an object representing the dom element the change event was attached to
@@ -74,7 +69,7 @@ dPlexApp.controller('dPlexController', ['$scope', 'toastr', ($scope, toastr) => 
     for (let i = 0; i < dom.target.files.length; i += 1) {
       const fileDetails = dom.target.files[i];
       // check if filename ends in json
-      invIndex.readFile(fileDetails).then((content) => {
+      invertedIndex.readFile(fileDetails).then((content) => {
         $scope.fileContent = content;
         $scope.uploadedFiles[fileDetails.name] = {};
         $scope.uploadedFiles[fileDetails.name].text = $scope.fileContent;
