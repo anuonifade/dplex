@@ -179,7 +179,6 @@ class InvertedIndex {
   */
   searchIndex(searchTerm, filename) {
     if ((typeof searchTerm === 'string' && searchTerm.trim() === '') ||
-      (typeof searchTerm === 'Object' && searchTerm.length === 0) ||
       searchTerm === undefined) {
       return false;
     }
