@@ -100,6 +100,10 @@ describe('InvertedIndex class', () => {
       const term = { t1: 'Welcome home', text: 'This is really home' };
       expect(this.indexInstance.createIndex(term, 'term')).toBeFalsy();
     });
+    it('should return false for file with no content', () => {
+      const term = {};
+      expect(this.indexInstance.createIndex(term, 'term')).toBeFalsy();
+    });
   });
   describe('Search Index', () => {
     it('should search through single files that are indexed', () => {
@@ -117,6 +121,19 @@ describe('InvertedIndex class', () => {
       const term = '';
       expect(this.indexInstance.searchIndex(term, 'books'))
       .toBeFalsy();
+    });
+    it('should return an object if filename is all', () => {
+      const books1 = [{title: 'Alice in Wonderland too',
+        text: 'Alice adventure in the wonderland was full of drama and action'}];
+      this.indexInstance.createIndex(books, 'books');
+      this.indexInstance.createIndex(books1, 'books1');
+      const expectedOutput = [{ indexes: { alice: [0], wonderland: [0] },
+        searchedFile: 'books',
+        documents: [0, 1, 2] },
+        { indexes: { alice: [0], wonderland: [0] },
+        searchedFile: 'books1',
+        documents: [0] }];
+        expect(this.indexInstance.searchIndex('Alice Wonderland', 'all')).toEqual(expectedOutput);
     });
   });
 

@@ -72,7 +72,7 @@ class InvertedIndex {
     let documentNum = 0;
     try {
       if (Object.keys(inputData).length < 1) {
-        this.handleError(filename, 'File contains no document', true);
+        this.handleError(filename, 'File contains no document', true); 
       }
       Object.keys(inputData).forEach((eachIndex) => {
         if (!this.validateFile(inputData[eachIndex])) {
@@ -84,6 +84,7 @@ class InvertedIndex {
       this.filesIndexed[filename].numOfDocs = documentNum;
       this.filesIndexed[filename].index = this.constructIndex(words);
       return true;
+       
     } catch (err) {
       if (this.error.status) {
         return false;
@@ -178,7 +179,7 @@ class InvertedIndex {
   */
   searchIndex(searchTerm, filename) {
     if ((typeof searchTerm === 'string' && searchTerm.trim() === '') ||
-      (typeof searchTerm === 'object' && searchTerm.length === 0) ||
+      (typeof searchTerm === 'Object' && searchTerm.length === 0) ||
       searchTerm === undefined) {
       return false;
     }
