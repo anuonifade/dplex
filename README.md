@@ -40,5 +40,6 @@ It can also be used locally by following the steps below
 - The application can not be distinguished between plural and singular words. It also does not distinguish between the past tense form of a verb. It does not identify synonyms and sees numbers as string
 
 ## More information
+- [DPlex Wiki](https://github.com/andela-aonifade/dplex/wiki)
 - [Inverted Index - Wikipedia](https://en.wikipedia.org/wiki/Inverted_index)
 - [Inverted Index](https://www.elastic.co/guide/en/elasticsearch/guide/current/inverted-index.html)
