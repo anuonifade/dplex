@@ -37,9 +37,11 @@ exclude_paths:
 - "samples/*"
 - "*.json"
 - "src/app.js"
+- "src/module.js"
 - "css/*"
 - "index.html"
 - "specs/*"
 - .travis.yml
 - .eslintrc.json
-- "spec/dplex-test-spec.js"
+- "spec/*"
+- "images/*"
