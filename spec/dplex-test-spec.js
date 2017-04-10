@@ -124,21 +124,21 @@ describe('InvertedIndex class', () => {
     });
     it('should return an empty object for an words not found', () => {
       const term = 'Aeroplane';
-      const expectedOutput =  this.indexInstance.searchIndex(term, 'books');
+      const expectedOutput = this.indexInstance.searchIndex(term, 'books');
       expect(expectedOutput[0].indexes).toEqual({ });
     });
     it('should return an array of objects if filename is all', () => {
-      const books1 = [{title: 'Alice in Wonderland too',
-        text: 'Alice adventure in the wonderland was full of drama and action'}];
+      const books1 = [{ title: 'Alice in Wonderland too',
+        text: 'Alice adventure in the wonderland was full of drama and action' }];
       this.indexInstance.createIndex(books, 'books');
       this.indexInstance.createIndex(books1, 'books1');
       const expectedOutput = [{ indexes: { alice: [0], wonderland: [0] },
         searchedFile: 'books',
         documents: [0, 1, 2] },
-        { indexes: { alice: [0], wonderland: [0] },
+      { indexes: { alice: [0], wonderland: [0] },
         searchedFile: 'books1',
         documents: [0] }];
-        expect(this.indexInstance.searchIndex('Alice Wonderland', 'all')).toEqual(expectedOutput);
+      expect(this.indexInstance.searchIndex('Alice Wonderland', 'all')).toEqual(expectedOutput);
     });
   });
 

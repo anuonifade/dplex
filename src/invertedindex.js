@@ -49,12 +49,13 @@ class InvertedIndex {
   }
 
   /**
-   * handleError handles error 
+   * handleError handles error
    * @param {string} fileName - Name of file being indexed or searched
    * @param {string} errorMessage - Error message to be displayed
-   * @param {boolean} errorStatus - True or False 
+   * @param {boolean} errorStatus - True or False
+   * @return {Object} error - Error Object
    */
-  handleError(fileName, errorMessage, errorStatus){
+  handleError(fileName, errorMessage, errorStatus) {
     delete this.filesIndexed[fileName];
     this.error.status = errorStatus;
     this.error.message = errorMessage;
@@ -73,7 +74,7 @@ class InvertedIndex {
     let documentNum = 0;
     try {
       if (Object.keys(inputData).length < 1) {
-        this.handleError(filename, 'File contains no document', true); 
+        this.handleError(filename, 'File contains no document', true);
       }
       Object.keys(inputData).forEach((eachIndex) => {
         if (!this.validateFile(inputData[eachIndex])) {
@@ -85,7 +86,6 @@ class InvertedIndex {
       this.filesIndexed[filename].numOfDocs = documentNum;
       this.filesIndexed[filename].index = this.constructIndex(words);
       return true;
-       
     } catch (err) {
       if (this.error.status) {
         return false;
@@ -122,7 +122,7 @@ class InvertedIndex {
   /**
    * tokenize: method removes special characters and converts the text to
    * lowercase and then returns the array of words
-   * @param {string} text- the text to be tokenized
+   * @param {string} text - the text to be tokenized
    * @return {array} array of words in the documents
   */
   tokenize(text) {
@@ -155,12 +155,12 @@ class InvertedIndex {
   /**
    * getIndex method returns the indexed words and the documents that were found
    * @param {string} filename - name of the file to get its index
-   * @return {Object|boolean} the index or false if unable to 
+   * @return {Object|boolean} the index or false if unable to
   */
   getIndex(filename) {
     try {
       if (!this.filesIndexed[filename]) {
-        this.handleError(filename, 'File selected not indexed', false)
+        this.handleError(filename, 'File selected not indexed', false);
       }
       const file = this.filesIndexed[filename];
       return file.index;
@@ -204,9 +204,9 @@ class InvertedIndex {
 
   /**
    * getSearchResults method checks the index of the file and returns the result
-   * @param searchTokens {searchTokens} - the search query of one or more words
-   * @param filename {string} - the name of the file
-   * @return {object} - an object with the found words as keys
+   * @param {searchTokens} searchTokens - the search query of one or more words
+   * @param {string} filename - the name of the file
+   * @return {array} result - an array of objects with the found words as keys
   */
   getSearchResults(searchTokens, filename) {
     const indexToSearch = this.getIndex(filename), result = {};
@@ -225,7 +225,7 @@ class InvertedIndex {
   */
   getDocuments(filename) {
     const docs = [];
-    for (let i = 0; i < this.filesIndexed[filename].numOfDocs; i++) {
+    for (let i = 0; i < this.filesIndexed[filename].numOfDocs; i += 1) {
       docs.push(i);
     }
     return docs;
