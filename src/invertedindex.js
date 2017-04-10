@@ -5,6 +5,7 @@ let instance = null;
 /**
  * @class InvertedIndex class
  * Contains methods for InvertedIndex
+ * Only allows single instance of the object to be created
 */
 class InvertedIndex {
   /**
