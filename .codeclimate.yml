@@ -1,12 +1,11 @@
 engines:
-  duplications:
-    enabled: false
-    config:
-      languages:
-        #mass_threshold: 30
-        - javascript
   eslint:
     enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
   csslint:
     enabled: false
     # ... CONFIG CONTENT ...
