@@ -32,8 +32,7 @@ engines:
     enabled: true
 ratings:
   paths:
-    - "src/InvertedIndex.js"
-    - "spec/dplex-test-spec.js"
+    - "src/invertedindex.js"
 exclude_paths:
 - "samples/*"
 - "*.json"
@@ -43,4 +42,4 @@ exclude_paths:
 - "specs/*"
 - .travis.yml
 - .eslintrc.json
-- .babelrc
+- "spec/dplex-test-spec.js"
