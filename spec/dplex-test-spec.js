@@ -1,6 +1,6 @@
 
 describe('InvertedIndex class', () => {
-  beforeEach(() => {
+  beforeAll(() => {
     this.indexInstance = new InvertedIndex();
     this.validBook = [{ title: 'Welcome to Test Environment',
       text: 'Enjoy this file' }];
@@ -122,7 +122,12 @@ describe('InvertedIndex class', () => {
       expect(this.indexInstance.searchIndex(term, 'books'))
       .toBeFalsy();
     });
-    it('should return an object if filename is all', () => {
+    it('should return an empty object for an words not found', () => {
+      const term = 'Aeroplane';
+      const expectedOutput =  this.indexInstance.searchIndex(term, 'books');
+      expect(expectedOutput[0].indexes).toEqual({ });
+    });
+    it('should return an array of objects if filename is all', () => {
       const books1 = [{title: 'Alice in Wonderland too',
         text: 'Alice adventure in the wonderland was full of drama and action'}];
       this.indexInstance.createIndex(books, 'books');
