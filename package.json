@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andela-aonifade/invertedindex.git"
+    "url": "git+https://github.com/andela-aonifade/dplex.git"
   },
   "keywords": [
     "js",
@@ -21,9 +21,9 @@
   "author": "Anu Onifade",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/andela-aonifade/invertedindex/issues"
+    "url": "https://github.com/andela-aonifade/dplex/issues"
   },
-  "homepage": "https://github.com/andela-aonifade/invertedindex#readme",
+  "homepage": "https://github.com/andela-aonifade/dplex#readme",
   "dependencies": {
     "browser-sync": "^2.18.8",
     "connect": "^3.6.0",

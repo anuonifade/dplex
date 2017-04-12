@@ -29,7 +29,7 @@ gulp.task('serve', ['watch'], () => {
 });
 
 gulp.task('lint', () => {
-  gulp.src(['src/invertedindex.js', '!node_modules/**'])
+  gulp.src(['src/InvertedIndex.js', '!node_modules/**'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());

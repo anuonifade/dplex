@@ -14,7 +14,7 @@ module.exports = (config) => {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/invertedindex.js',
+      'src/InvertedIndex.js',
       'spec/*.js'
     ],
 
@@ -31,7 +31,7 @@ module.exports = (config) => {
       // source files, that you wanna generate coverage for
       // do not include tests or libraries
       // (these files will be instrumented by Istanbul)
-      'src/invertedindex.js': ['coverage']
+      'src/InvertedIndex.js': ['coverage']
     },
 
     customLaunchers: {

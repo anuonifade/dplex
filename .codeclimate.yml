@@ -32,7 +32,7 @@ engines:
     enabled: true
 ratings:
   paths:
-    - "src/invertedindex.js"
+    - "src/InvertedIndex.js"
 exclude_paths:
 - "samples/*"
 - "*.json"

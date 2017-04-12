@@ -1,9 +1,8 @@
-
 const hasProperty = Object.prototype.hasOwnProperty;
 let instance = null;
 
 /**
- * @class InvertedIndex class
+ * InvertedIndex class
  * Contains methods for InvertedIndex
  * Only allows single instance of the object to be created
 */
@@ -26,9 +25,9 @@ class InvertedIndex {
   /**
    * readFile function is used to get all the index
    * @param {object} inputData - the json data to index
-   * @return {reject(false)} - When file is of bad extent of
+   * @return {boolean} - When file is of bad extent of
    * invalid json format
-   * @return {resolve(true)} - When file is of the right extension structure
+   * @return {boolean} - When file is of the right extension structure
    */
   readFile(inputData) {
     return new Promise((resolve, reject) => {
@@ -220,7 +219,7 @@ class InvertedIndex {
 
   /**
    * getDocuments get an array of the documents index e.g [0, 1, 2, 3]
-   * @param {filename} - name of the file to get its document
+   * @param {string} filename - name of the file to get its document
    * @return {array} an array of the documents index
   */
   getDocuments(filename) {
@@ -232,3 +231,5 @@ class InvertedIndex {
   }
 
 }
+
+module.export = InvertedIndex;
