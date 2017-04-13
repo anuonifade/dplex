@@ -8,7 +8,7 @@ const gulp = require('gulp'),
   browserSync = require('browser-sync').create();
 
 gulp.task('scripts', () => {
-  gulp.src('./spec/dplex-test-spec.js')
+  gulp.src('./spec/InvertedIndex.spec.js')
   .pipe(browserify())
   .pipe(rename('bundle.js'))
   .pipe(gulp.dest('./build'));

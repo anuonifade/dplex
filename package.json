@@ -1,5 +1,5 @@
 {
-  "name": "inverted-index",
+  "name": "DPlex",
   "version": "1.0.0",
   "description": "Dplex is an inverted index App to help in easy word search in a document",
   "scripts": {
