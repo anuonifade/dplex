@@ -2,9 +2,17 @@
 const gulp = require('gulp'),
   connect = require('gulp-connect'),
   eslint = require('gulp-eslint'),
+  rename = require('gulp-rename'),
   coveralls = require('gulp-coveralls'),
+  browserify = require('gulp-browserify'),
   browserSync = require('browser-sync').create();
 
+gulp.task('scripts', () => {
+  gulp.src('./spec/dplex-test-spec.js')
+  .pipe(browserify())
+  .pipe(rename('bundle.js'))
+  .pipe(gulp.dest('./build'));
+});
 
 gulp.task('watch', () => {
   gulp.watch('src/*.js', ['reload']);
@@ -61,6 +69,7 @@ gulp.task('reload', () => {
 
 gulp.task('default',
   [
+    'scripts',
     'reload',
     'test-watch',
     'test-reload',

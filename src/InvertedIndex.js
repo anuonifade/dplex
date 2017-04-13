@@ -231,4 +231,3 @@ class InvertedIndex {
 
 }
 
-module.export = InvertedIndex;
