@@ -83,7 +83,8 @@ class InvertedIndex {
     return false;
   }
   /**
-   * validateFile validates the structure of the file uploaded
+   * validateFile if file has content and
+   * validates the structure of the file uploaded
    * @param {object} fileContent - The json data to be validated
    * @return {boolean} - True when document has the right structure
    * and False if otherwise
