@@ -55,8 +55,9 @@ class InvertedIndex {
    */
   handleError(fileName, errorMessage, errorStatus) {
     delete this.filesIndexed[fileName];
-    console.log('Status: ', this.error.status);
-    console.log('Error Message: ', this.error.message);
+    this.error.status = errorStatus;
+    this.error.message = errorMessage;
+    this.error.filename = fileName;
     throw this.error;
   }
 
@@ -127,8 +128,7 @@ class InvertedIndex {
    * @return {array} array of words in the documents
   */
   static tokenize(text) {
-    let splittedWords = {};
-    splittedWords = text.replace(/[^A-Za-z\s+]/g, '').trim()
+    let splittedWords = text.replace(/[^A-Za-z\s+]/g, '').trim()
       .toLowerCase().split(/\b\s+(?!$)/);
     splittedWords = splittedWords.filter(eachWords => eachWords !== '');
     return splittedWords;
@@ -143,13 +143,13 @@ class InvertedIndex {
   */
   static constructIndex(documents) {
     const indexWords = {};
-    documents.forEach((eachDoc) => {
-      eachDoc.textTokens.forEach((token) => {
+    documents.forEach((eachDocument) => {
+      eachDocument.textTokens.forEach((token) => {
         if (!hasProperty.call(indexWords, token)) {
           indexWords[token] = [];
         }
-        if (indexWords[token].indexOf(eachDoc.documentCount) === -1) {
-          indexWords[token].push(eachDoc.documentCount);
+        if (indexWords[token].indexOf(eachDocument.documentCount) === -1) {
+          indexWords[token].push(eachDocument.documentCount);
         }
       });
     });
@@ -214,11 +214,13 @@ class InvertedIndex {
   */
   getSearchResults(searchTokens, fileName) {
     const indexToSearch = this.getIndex(fileName), result = {};
-    InvertedIndex.tokenize(searchTokens).forEach((eachSearchWord) => {
-      if (indexToSearch[eachSearchWord]) {
-        result[eachSearchWord] = indexToSearch[eachSearchWord];
+    const tokens = InvertedIndex.tokenize(searchTokens);
+
+    for (let i = 0; i <= tokens.length; i += 1) {
+      if (indexToSearch[tokens[i]]) {
+        result[tokens[i]] = indexToSearch[tokens[i]];
       }
-    });
+    }
     return result;
   }
 
