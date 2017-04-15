@@ -11,4 +11,5 @@ spec/*.html
 *.html
 karma.conf.js
 Profile
+build/
 
