@@ -55,8 +55,8 @@ class InvertedIndex {
    */
   handleError(fileName, errorMessage, errorStatus) {
     delete this.filesIndexed[fileName];
-    this.error.status = errorStatus;
-    this.error.message = errorMessage;
+    console.log('Status: ', this.error.status);
+    console.log('Error Message: ', this.error.message);
     throw this.error;
   }
 
@@ -70,37 +70,38 @@ class InvertedIndex {
     this.filesIndexed[fileName] = {};
     const words = [];
     let documentCount = 0;
+    if (InvertedIndex.validateFile(fileContent)) {
+      Object.keys(fileContent).forEach((eachIndex) => {
+        words.push(InvertedIndex
+          .getDocumentTokens(fileContent, documentCount));
+        documentCount += 1;
+      });
+      this.filesIndexed[fileName].documentCount = documentCount;
+      this.filesIndexed[fileName].index = InvertedIndex.constructIndex(words);
+      return true;
+    }
+    return false;
+  }
+  /**
+   * validateFile validates the structure of the file uploaded
+   * @param {object} fileContent - The json data to be validated
+   * @return {boolean} - True when document has the right structure
+   * and False if otherwise
+   */
+  static validateFile(fileContent) {
     try {
       if (Object.keys(fileContent).length < 1) {
         this.handleError(fileName, 'File contains no document', true);
       }
       Object.keys(fileContent).forEach((eachIndex) => {
-        if (!InvertedIndex.validateFile(fileContent[eachIndex])) {
+        if (!fileContent[eachIndex].text || !fileContent[eachIndex].title) {
           this.handleError(fileName, 'Incorrect Document Structure', true);
         }
-        words.push(InvertedIndex.getDocumentTokens(fileContent, documentCount));
-        documentCount += 1;
       });
-      this.filesIndexed[fileName].numOfDocs = documentCount;
-      this.filesIndexed[fileName].index = InvertedIndex.constructIndex(words);
       return true;
     } catch (err) {
-      if (this.error.status) {
-        return false;
-      }
-    }
-  }
-  /**
-   * validateFile validates the structure of the file uploaded
-   * @param {object} documentContent - The json data to be validated
-   * @return {boolean} - True when document has the right structure
-   * and False if otherwise
-   */
-  static validateFile(documentContent) {
-    if (!documentContent.text || !documentContent.title) {
       return false;
     }
-    return true;
   }
   /**
    * getDocumentTokens method gets all the tokens in each document
@@ -125,7 +126,8 @@ class InvertedIndex {
    * @return {array} array of words in the documents
   */
   static tokenize(text) {
-    let splittedWords = text.replace(/[^A-Za-z\s+]/g, '').trim()
+    let splittedWords = {};
+    splittedWords = text.replace(/[^A-Za-z\s+]/g, '').trim()
       .toLowerCase().split(/\b\s+(?!$)/);
     splittedWords = splittedWords.filter(eachWords => eachWords !== '');
     return splittedWords;
@@ -166,7 +168,7 @@ class InvertedIndex {
       const file = this.filesIndexed[fileName];
       return file.index;
     } catch (err) {
-      return this.error.status;
+      return false;
     }
   }
 
@@ -222,14 +224,14 @@ class InvertedIndex {
   /**
    * getDocuments get an array of the documents index e.g [0, 1, 2, 3]
    * @param {string} fileName - name of the file to get its document
-   * @return {array} an array of the documents index
+   * @return {array} an array of the documents indexed
   */
   getDocuments(fileName) {
-    const docs = [];
-    for (let i = 0; i < this.filesIndexed[fileName].numOfDocs; i += 1) {
-      docs.push(i);
+    const documents = [];
+    for (let i = 0; i < this.filesIndexed[fileName].documentCount; i += 1) {
+      documents.push(i);
     }
-    return docs;
+    return documents;
   }
 
 }
