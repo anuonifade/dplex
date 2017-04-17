@@ -79,6 +79,7 @@ class InvertedIndex {
       });
       this.filesIndexed[fileName].documentCount = documentCount;
       this.filesIndexed[fileName].index = InvertedIndex.constructIndex(words);
+      console.log(words);
       return true;
     }
     return false;
@@ -215,7 +216,7 @@ class InvertedIndex {
    * @return {array} result - an array of objects with the found words as keys
   */
   getSearchResults(searchTokens, fileName) {
-    const indexToSearch = this.getIndex(fileName), result = {};
+    const indexToSearch = this.getIndex(fileName) || {}, result = {};
     const tokens = InvertedIndex.tokenize(searchTokens);
 
     for (let i = 0; i <= tokens.length; i += 1) {

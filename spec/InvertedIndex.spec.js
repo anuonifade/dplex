@@ -99,10 +99,6 @@ describe('InvertedIndex class', () => {
       expect(indexInstance.filesIndexed.books.index)
         .toEqual(expectedResult);
     });
-    it('should return false for incorrect document structure', () => {
-      const term = { t1: 'Welcome home', text: 'This is really home' };
-      expect(indexInstance.createIndex(term, 'term')).toBeFalsy();
-    });
     it('should return false for file with no content', () => {
       const term = {};
       expect(indexInstance.createIndex(term, 'term')).toBeFalsy();
@@ -129,6 +125,22 @@ describe('InvertedIndex class', () => {
       const term = 'Aeroplane';
       const expectedOutput = indexInstance.searchIndex(term, 'books');
       expect(expectedOutput[0].indexes).toEqual({ });
+    });
+    it('should return appropriate result for filename all',
+    () => {
+      const books1 = [];
+      indexInstance.createIndex(books, 'books');
+      indexInstance.createIndex(books1, 'books1');
+      const expectedOutput =
+        [Object({ indexes: Object({ alice: [0], the: [1, 2] }),
+          searchedFile: 'books',
+          documents: [0, 1, 2] }),
+          Object({ indexes: Object({ }), searchedFile: 'term', documents: [] }),
+          Object({ indexes: Object({ }),
+            searchedFile: 'books1',
+            documents: [] })];
+      expect(indexInstance
+        .searchIndex('Alice is the', 'all')).toEqual(expectedOutput);
     });
   });
   describe('Tokenize words', () => {
@@ -197,7 +209,7 @@ describe('InvertedIndex class', () => {
     });
   });
 
-  describe('Get Document Data', () => {
+  describe('Get Document Tokens Data', () => {
     it('should return the approriate object for a given document',
     () => {
       const expectedOutput = { documentCount: 0,
@@ -206,6 +218,39 @@ describe('InvertedIndex class', () => {
       const term = [{ text: 'Welcome', title: 'This is a test document' }];
       expect(InvertedIndex
         .getDocumentTokens(term, documentCount)).toEqual(expectedOutput);
+    });
+  });
+
+  describe('Get Document Data', () => {
+    it('should return the appropriate array of documents for a given file',
+    () => {
+      const expectedOutput = [0, 1, 2];
+      indexInstance.createIndex(books, 'books');
+      expect(indexInstance
+        .getDocuments('books')).toEqual(expectedOutput);
+    });
+  });
+
+  describe('Get Search result Data', () => {
+    it('should return the appropriate result for tokens searched',
+    () => {
+      const words = 'Alice is a girl';
+      const expectedOutput = { alice: [0], a: [0, 1, 2] };
+      indexInstance.createIndex(books, 'books');
+      expect(indexInstance
+      .getSearchResults(words, 'books')).toEqual(expectedOutput);
+    });
+  });
+
+  describe('Get Contruct Index Data', () => {
+    it('should return the appropriate indexed words for a given document',
+    () => {
+      const documentTokens = [{ documentCount: 0,
+        textTokens: ['welcome', 'this', 'is', 'a', 'test', 'document'] }];
+      const expectedOutput =
+        { welcome: [0], this: [0], is: [0], a: [0], test: [0], document: [0] };
+      expect(InvertedIndex.constructIndex(documentTokens))
+        .toEqual(expectedOutput);
     });
   });
 });
