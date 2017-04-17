@@ -79,7 +79,6 @@ class InvertedIndex {
       });
       this.filesIndexed[fileName].documentCount = documentCount;
       this.filesIndexed[fileName].index = InvertedIndex.constructIndex(words);
-      console.log(words);
       return true;
     }
     return false;
