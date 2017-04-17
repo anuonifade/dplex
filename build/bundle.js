@@ -132,7 +132,6 @@ describe('InvertedIndex class', () => {
       expect(expectedOutput[0].indexes).toEqual({ });
     });
   });
-
   describe('Tokenize words', () => {
     it('should strip out special characters from excerpt in documents', () => {
       let excerpt = 'Alice l##$oves her ima&&gination?';

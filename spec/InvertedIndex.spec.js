@@ -125,14 +125,14 @@ describe('InvertedIndex class', () => {
       expect(indexInstance.searchIndex(term, 'books'))
       .toBeFalsy();
     });
-    it('should return an empty object for an words not found', () => {
+    it('should return an empty object for words not found', () => {
       const term = 'Aeroplane';
       const expectedOutput = indexInstance.searchIndex(term, 'books');
       expect(expectedOutput[0].indexes).toEqual({ });
     });
   });
   describe('Tokenize words', () => {
-    it('should strip out special characters from excerpt in documents', () => {
+    it('should strip out special characters from text in documents', () => {
       let excerpt = 'Alice l##$oves her ima&&gination?';
       const expectedTokens = ['alice', 'loves', 'her', 'imagination'];
       excerpt = InvertedIndex.tokenize(excerpt);
@@ -141,7 +141,7 @@ describe('InvertedIndex class', () => {
   });
 
   describe('Get index', () => {
-    it('should return false for an empty filename', () => {
+    it('should return the appropriate output for the given filename', () => {
       const filename = 'books';
       const expectedOutput = { alice: [0],
         falls: [0],
@@ -178,7 +178,7 @@ describe('InvertedIndex class', () => {
       expect(indexInstance.getIndex(filename))
         .toEqual(expectedOutput);
     });
-    it('should return the appropriate output for the given filename', () => {
+    it('should return false for an empty filename', () => {
       const filename = '';
       indexInstance.createIndex(books, 'books');
       expect(indexInstance.getIndex(filename))
