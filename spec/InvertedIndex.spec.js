@@ -128,21 +128,36 @@ describe('InvertedIndex class', () => {
     });
     it('should return appropriate result for filename all',
     () => {
-      const books1 = [];
+      const books1 = [{
+        title: 'Alice the Great',
+        text:
+        'There is no better way to greatness than not giving up'
+      },
+
+      {
+        title: 'Are you there for Development',
+        text: `I have tried so many times but it's been unyielding 
+          but I have made up my mind to develop no matter the obstacle`
+      }];
       indexInstance.createIndex(books, 'books');
       indexInstance.createIndex(books1, 'books1');
       const expectedOutput =
         [Object({ indexes: Object({ alice: [0], the: [1, 2] }),
           searchedFile: 'books',
           documents: [0, 1, 2] }),
-          Object({ indexes: Object({ }), searchedFile: 'term', documents: [] }),
           Object({ indexes: Object({ }),
+            searchedFile: 'term',
+            documents: [] }),
+          Object({ indexes: Object({ alice: [0],
+            is: [0],
+            the: [0, 1] }),
             searchedFile: 'books1',
-            documents: [] })];
+            documents: [0, 1] })];
       expect(indexInstance
         .searchIndex('Alice is the', 'all')).toEqual(expectedOutput);
     });
   });
+
   describe('Tokenize words', () => {
     it('should strip out special characters from text in documents', () => {
       let excerpt = 'Alice l##$oves her ima&&gination?';
