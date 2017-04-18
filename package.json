@@ -33,6 +33,7 @@
     "gulp-connect": "^5.0.0",
     "gulp-coveralls": "^0.1.4",
     "gulp-eslint": "^3.0.1",
+    "karma-jasmine": "^1.1.0",
     "serve-static": "^1.12.1"
   },
   "devDependencies": {
@@ -47,9 +48,10 @@
     "gulp-rename": "^1.2.2",
     "jasmine-core": "^2.5.2",
     "karma": "^1.5.0",
+    "karma-browserify": "^5.1.1",
     "karma-chrome-launcher": "^2.0.0",
     "karma-coverage": "^1.1.1",
     "karma-firefox-launcher": "^1.0.1",
-    "karma-jasmine": "^1.0.2"
+    "karma-jasmine": "^1.1.0"
   }
 }

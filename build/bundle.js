@@ -1,4 +1,87 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports=[
+  {
+    "title": "Alice in Wonderland",
+    "text": "Alice falls into a rabbit hole and enters a world full of imagination."
+  },
+
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "Alice in Wonderland",
+    "text": "Alice falls into a rabbit hole and enters a world full of imagination."
+  },
+
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "Alice in Wonderland",
+    "text": "Alice falls into a rabbit hole and enters a world full of imagination."
+  },
+
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "Alice in Wonderland",
+    "text": "Alice falls into a rabbit hole and enters a world full of imagination."
+  },
+
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "Alice in Wonderland",
+    "text": "Alice falls into a rabbit hole and enters a world full of imagination."
+  },
+
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "Alice in Wonderland",
+    "text": "Alice falls into a rabbit hole and enters a world full of imagination."
+  },
+
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  }
+]
+
+},{}],2:[function(require,module,exports){
+const validBookFile = require('../samples/books.json');
 
 describe('InvertedIndex class', () => {
   beforeAll(() => {
@@ -77,13 +160,20 @@ describe('InvertedIndex class', () => {
 
   describe('Read File', () => {
     it('should return false for an invalid filename extension', () => {
-      const file = { name: 'badfileextension.jpg' };
-      const file1 = { name: 'badfileextension.jsona' };
-      InvertedIndex.readFile(file).then((response) => {
+      const badFile = { name: 'badfileextension.jpg' };
+      const anotherBadFile = { name: 'badfileextension.jsona' };
+      InvertedIndex.readFile(badFile).then((response) => {
         expect(response).toBeFalsy();
       });
-      InvertedIndex.readFile(file1).then((response) => {
+      InvertedIndex.readFile(anotherBadFile).then((response) => {
         expect(response).toBeFalsy();
+      });
+    });
+    const bookFile = new File([JSON.strigify(validBookFile)],
+      'books.json', { type: 'application/json' });
+    it('should return appropriate value for a valid json file', () => {
+      InvertedIndex.readFile(bookFile).then((response) => {
+        expect(response).toEqual(books);
       });
     });
   });
@@ -235,8 +325,8 @@ describe('InvertedIndex class', () => {
     });
   });
 
-  describe('Get Document Tokens Data', () => {
-    it('should return the approriate object for a given document',
+  describe('Get Document Tokens', () => {
+    it('should return the appropriate object for a given document',
     () => {
       const expectedOutput = { documentCount: 0,
         textTokens: ['welcome', 'this', 'is', 'a', 'test', 'document'] };
@@ -266,7 +356,7 @@ describe('InvertedIndex class', () => {
     });
   });
 
-  describe('Get Contruct Index Data', () => {
+  describe('Get Construct Index Data', () => {
     it('should return the appropriate indexed words for a given document',
     () => {
       const documentTokens = [{ documentCount: 0,
@@ -279,4 +369,4 @@ describe('InvertedIndex class', () => {
   });
 });
 
-},{}]},{},[1])
+},{"../samples/books.json":1}]},{},[2])

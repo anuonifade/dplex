@@ -9,7 +9,13 @@ module.exports = (config) => {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['browserify', 'jasmine'],
+    plugins: [
+      'karma-browserify',
+      'karma-jasmine',
+      'karma-chrome-launcher',
+      'karma-coverage'
+    ],
 
 
     // list of files / patterns to load in the browser
@@ -31,7 +37,8 @@ module.exports = (config) => {
       // source files, that you wanna generate coverage for
       // do not include tests or libraries
       // (these files will be instrumented by Istanbul)
-      'src/InvertedIndex.js': ['coverage']
+      'src/InvertedIndex.js': ['coverage'],
+      'spec/InvertedIndex.spec.js': ['browserify']
     },
 
     customLaunchers: {

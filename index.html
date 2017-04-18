@@ -99,7 +99,8 @@
                   <span ng-if="indexDisplay">Showing index for {{details.indexedFile}}</span>
                   <span ng-if="!indexDisplay">Search result for "{{searchQuery}}" in "{{details.searchedFile}}"</span>
                 </h2>
-                <table class="table table-striped" id='myTable'>
+                <div id="myTable">
+                <table class="table table-striped" >
                   <thead>
                     <th>Tokens</th>
                     <th style="text-align:center" ng-repeat="i in details.documents">Document {{i+1}}</th>
@@ -113,6 +114,7 @@
                     </tr>
                   </tbody>
                 </table>
+                </div>
               </div>
             </div>
             <br/>
