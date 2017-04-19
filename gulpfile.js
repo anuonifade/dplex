@@ -15,13 +15,13 @@ gulp.task('scripts', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch('src/*.js', ['reload']);
-  gulp.watch('css/*.css', ['reload']);
+  gulp.watch('./src/*.js', ['reload']);
+  gulp.watch('./src/public/css/*.css', ['reload']);
   gulp.watch('*.html', ['reload']);
 });
 
 gulp.task('test', ['pre-test'], () => (
-  gulp.src('test/spec/*.js')
+  gulp.src('spec/*.js')
     .on('end', () => {
       gulp.src('coverage/lcov.info')
         .pipe(coveralls());
@@ -44,11 +44,11 @@ gulp.task('lint', () => {
 });
 
 gulp.task('test-watch', () => {
-  gulp.watch('jasmine/spec/*.js', ['test-reload']);
+  gulp.watch('spec/*.js', ['test-reload']);
 });
 
 gulp.task('test-reload', () => {
-  gulp.src(['jasmine/spec/*.js']).pipe(connect.reload());
+  gulp.src(['spec/*.js']).pipe(connect.reload());
 });
 
 gulp.task('connect', () => {
@@ -63,7 +63,7 @@ gulp.task('reload', () => {
   gulp.src(
     ['*.html',
       'src/*.js',
-      'css/*.css'
+      '*.css'
     ]).pipe(connect.reload());
 });
 

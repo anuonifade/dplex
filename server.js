@@ -1,5 +1,14 @@
-const connect = require('connect');
-const serveStatic = require('serve-static');
+const express = require('express');
+const path = require('path');
 
+const app = express();
+
+//  Routes
+app.get('/', (req, res) => {
+  res.sendFile(`${__dirname}/src/index.html`);
+});
+app.use(express.static(path.join(__dirname, 'src')));
+
+//  Start server
 const port = process.env.PORT || 3000;
-connect().use(serveStatic('./')).listen(port);
+app.listen(port, () => console.log(`Listening on port ${port}`));
