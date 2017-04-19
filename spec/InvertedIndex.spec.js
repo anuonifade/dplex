@@ -2,10 +2,8 @@ const validBookFile = require('../samples/books.json');
 
 describe('InvertedIndex class', () => {
   beforeAll(() => {
-    indexInstance = new InvertedIndex();
-    validBook = [{ title: 'Welcome to Test Environment',
-      text: 'Enjoy this file' }];
-    books = [
+    const indexInstance = new InvertedIndex();
+    const books = [
       {
         title: 'Alice in Wonderland',
         text:
